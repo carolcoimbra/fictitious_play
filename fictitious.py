@@ -24,7 +24,6 @@ class Fictitious(object):
 
 	def calc_exp_util(self, e):
 		return np.sum(self.m[e,:]*(self.b/np.sum(self.b)))
-		
 
 	def get_strategy(self):
 		max_exp = -999999999
@@ -40,7 +39,7 @@ class Fictitious(object):
 	def get_random_strategy(self):
 		return random.randint(0,len(self.m[:,0])-1)
 
-	def get_fuck_strategy(self, player):
+	def get_bad_friend_strategy(self, player):
 		min_exp = 999999999
 		best_s = -1
 		for s in xrange(len(self.m[:,0])):
@@ -50,4 +49,12 @@ class Fictitious(object):
 				best_s = s
 		return best_s
 
-
+	def get_good_friend_strategy(self, player):
+		max_exp = -999999999
+		best_s = -1
+		for s in xrange(len(self.m[:,0])):
+			max_op = np.sum(player.m[:,s]*(self.b/np.sum(self.b)))
+			if max_op > max_exp:
+				max_exp = max_op
+				best_s = s
+		return best_s
