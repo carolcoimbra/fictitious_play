@@ -23,16 +23,16 @@ def Plot(data, file_name):
 	print len(data[0,:])
 	x = np.linspace(1, len(data)+1)
 	for j in range(len(data[0,:])):
-		fig = plt.plot(data[:,j], label="Jogador"+str(j+1), color=color[j], lw=2.0)
+		fig = plt.plot(data[:,j], label="Jogador"+str(2-j), color=color[j], lw=2.0)
 
-	plt.title('Shapley')
-	plt.xlabel(u'Número de interações')
+	plt.title('Jogo Potencial')
+	plt.xlabel(u'Número de iterações')
 	plt.ylabel(u'Crença do jogador escolher A')
 
 	leg = plt.legend(loc='best', ncol=1)
 	leg.get_frame().set_alpha(0.5)
 
-	plt.savefig("figures/"+str(file_name)+".png",bbox_inches='tight',dpi=1000)	
+	plt.savefig("figures/"+str(file_name)+"--.png",bbox_inches='tight',dpi=1000)	
 	plt.show()
 
 
@@ -56,8 +56,8 @@ def Plot2(data, file_name):
 
 
 def main2():
-	file_name = "games/prisioner"
-	matrix_a, matrix_b = ReadData(file_name, " ")
+	file_name = "prisioner"
+	matrix_a, matrix_b = ReadData("games/"+file_name, " ")
 
 	n_iter = 10000
 
@@ -83,14 +83,13 @@ def main2():
 
 
 def main():
-	file_name = "games/shapley"
-	matrix_a, matrix_b = ReadData(file_name, " ")
+	file_name = "potential"
+	matrix_a, matrix_b = ReadData("games/"+file_name, " ")
 
-	n_iter = 10000
+	n_iter = 1000
 
-	belief_a = np.array([1,0,0])
-	belief_b = np.array([1,0,0])
-
+	belief_a = np.array([1,1])
+	belief_b = np.array([1,1])
 	player_a = fic.Fictitious(matrix_a, belief_a)
 	player_b = fic.Fictitious(matrix_b, belief_b)
 
